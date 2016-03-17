@@ -72,3 +72,11 @@ class WebCollector:
         elif isinstance(element, Comment):
             return False
         return True
+
+if __name__ == "__main__":
+    wc = WebCollector(sentiment_analyer=sa, aliases=["rhawiz"])
+    #print wc.run()
+
+
+
+
