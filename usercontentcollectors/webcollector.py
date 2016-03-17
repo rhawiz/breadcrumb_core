@@ -22,7 +22,7 @@ class WebCollector:
     def run(self):
         self.content = []
         for alias in self.aliases:
-            google_search = GoogleWebSearch(query=alias, num=25, start=0, pages=1,
+            google_search = GoogleWebSearch(query=alias, num=50, start=0, pages=1,
                                             min_date=self.min_date, max_date=self.max_date)
             google_search_results = google_search.search()
             for g_result in google_search_results:
@@ -51,7 +51,10 @@ class WebCollector:
         return self.content
 
     def json(self):
-        return json.dump(self.content)
+        return json.dumps(self.content)
+
+    def get_content(self):
+        return self.content
 
     def _analyse_html(self, html, alias):
         soup = BeautifulSoup(html, "html.parser")
@@ -69,8 +72,3 @@ class WebCollector:
         elif isinstance(element, Comment):
             return False
         return True
-
-
-if __name__ == "__main__":
-    wc = WebCollector(aliases=['rawand+hawiz'], sentiment_analyer=sa)
-    print wc.run()
