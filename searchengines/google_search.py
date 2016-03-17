@@ -1,13 +1,12 @@
-import json
 import random
+import socket
 from time import sleep
+
 import requests
 from bs4 import BeautifulSoup
-import socket
 
-from netutils import generate_request_header, generate_proxy_dict
-from utils import is_ascii, get_hash
-import mechanize
+from utils.utils import get_hash
+from utils.netutils import generate_request_header
 
 """
     Google Web Search URL usage
@@ -69,8 +68,7 @@ class GoogleWebSearch:
             url = self._construct_url(page)
             page += 1
             header = generate_request_header()
-            br = mechanize.Browser()
-            proxy_dict = generate_proxy_dict()
+            #proxy_dict = generate_proxy_dict()
             try:
                 # request_response = br.open(url)
                 attempts += 1

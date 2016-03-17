@@ -61,7 +61,6 @@ HTTPS_PROXIES = [
 
 ]
 
-
 """
 List of various browser User-Agent headers
 """
@@ -123,7 +122,6 @@ USER_AGENT_HEADER_LIST = [
 ]
 
 
-
 def generate_proxy_dict():
     proxy_dict = {
         'http': HTTP_PROXIES[random.randint(0, len(HTTP_PROXIES) - 1)],
@@ -137,4 +135,3 @@ def generate_request_header():
     header = BASE_REQUEST_HEADER
     header["User-Agent"] = USER_AGENT_HEADER_LIST[random.randint(0, len(USER_AGENT_HEADER_LIST) - 1)]
     return header
-

@@ -1,15 +1,13 @@
 import json
-import os
 import re
+import unicodedata
 
 import requests
-import unicodedata
 from bs4 import BeautifulSoup, Comment
 
-from netutils import generate_request_header
-from searchengines.google_search import GoogleWebSearch
-
 from ai.sentimentanalyser import analyse_text as sa
+from searchengines.google_search import GoogleWebSearch
+from utils.netutils import generate_request_header
 
 
 class WebCollector:
@@ -22,7 +20,7 @@ class WebCollector:
     def run(self):
         self.content = []
         for alias in self.aliases:
-            google_search = GoogleWebSearch(query=alias, num=50, start=0, pages=1,
+            google_search = GoogleWebSearch(query=alias, num=25, start=0, pages=1,
                                             min_date=self.min_date, max_date=self.max_date)
             google_search_results = google_search.search()
             for g_result in google_search_results:
@@ -50,11 +48,15 @@ class WebCollector:
                 self.content.append(output)
         return self.content
 
-    def json(self):
-        return json.dumps(self.content)
-
     def get_content(self):
         return self.content
+
+    def json(self, sort_by=None):
+
+        if sort_by == 'pos' or sort_by == 'neutral' or sort_by == 'neg':
+            return json.dumps(sorted(self.content, key=lambda k: k['analysis']['probability'][sort_by], reverse=True))
+
+        return json.dumps(self.content)
 
     def _analyse_html(self, html, alias):
         soup = BeautifulSoup(html, "html.parser")
@@ -73,10 +75,8 @@ class WebCollector:
             return False
         return True
 
+
 if __name__ == "__main__":
-    wc = WebCollector(sentiment_analyer=sa, aliases=["rhawiz"])
-    #print wc.run()
-
-
-
-
+    wc = WebCollector(sentiment_analyer=sa, aliases=["Rawand Hawiz"])
+    wc.run()
+    print wc.get_content()
