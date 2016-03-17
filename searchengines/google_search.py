@@ -89,7 +89,8 @@ class GoogleWebSearch:
             self.results += content
 
             if self.wait == -1:
-                wait_time = random.uniform(0.5, 2.5)
+                # Wait between 1.0 and 5.0 seconds before making the next request to prevent getting blocked.
+                wait_time = random.uniform(1.0, 5.0)
                 sleep(wait_time)
 
         return self.results
