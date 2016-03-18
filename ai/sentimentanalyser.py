@@ -1,6 +1,6 @@
 import requests
 
-from utils import is_ascii
+from utils.utils import is_ascii
 
 url = 'http://text-processing.com/api/sentiment/'
 
