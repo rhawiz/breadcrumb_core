@@ -6,7 +6,7 @@ import requests
 from bs4 import BeautifulSoup
 from breadcrumbcore.utils.netutils import generate_request_header
 
-from breadcrumbcore.utils.utils import get_hash
+from breadcrumbcore.utils.utils import get_hash8
 
 """
     Google Web Search URL usage
@@ -132,7 +132,7 @@ class GoogleWebSearch:
 
             # We'll hash the short text + link url, and if it exists in the list of global hashes,
             #   then we will stop scraping as we've reached google's last page
-            result_hash = get_hash(short_text + link_url)
+            result_hash = get_hash8(short_text + link_url)
             if result_hash in self.global_hashes:
                 self.stop_search = True
                 return []
