@@ -14,12 +14,13 @@ from breadcrumbcore.searchengines.googlesearch import GoogleWebSearch
 class WebCollector:
     CONTENT_SEARCH_SPAN = 100
 
-    def __init__(self, aliases, sentiment_analyer=None, min_date=None, max_date=None, results=50):
+    def __init__(self, aliases, sentiment_analyer=None, min_date=None, max_date=None, results=50, debug=False):
         self.aliases = aliases
         self.sentiment_analyser = sentiment_analyer
         self.min_date = min_date
         self.max_date = max_date
         self.results = results
+        self.debug = debug
 
     def run(self):
         num = 50
@@ -44,7 +45,9 @@ class WebCollector:
                     'short_text': short_text,
                     'alias': alias
                 }
-                print url, url_text, short_text
+
+                if self.debug:
+                    print url, url_text, short_text
 
                 try:
                     response = requests.get(url, headers=generate_request_header())
