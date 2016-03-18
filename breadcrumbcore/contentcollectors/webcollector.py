@@ -36,8 +36,8 @@ class WebCollector:
             google_search_results = google_search.search()
             for g_result in google_search_results:
                 url = g_result.get("url")
-                url_text = g_result.get("url_text")
-                short_text = g_result.get("text")
+                url_text = g_result.get("url_text", 'ignore')
+                short_text = g_result.get("text", 'ignore')
                 output = {
                     'url': url,
                     'url_text': url_text,
