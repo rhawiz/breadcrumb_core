@@ -146,3 +146,7 @@ class GoogleWebSearch:
             results.append(content)
 
         return results
+
+
+class GoogleImageSearch:
+    pass

@@ -8,7 +8,7 @@ from ai.sentimentanalyser import analyse_text as sa
 from bs4 import BeautifulSoup, Comment
 from utils.netutils import generate_request_header
 
-from breadcrumbcore.searchengines.google_search import GoogleWebSearch
+from breadcrumbcore.searchengines.googlesearch import GoogleWebSearch
 
 
 class WebCollector:
