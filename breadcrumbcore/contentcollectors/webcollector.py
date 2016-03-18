@@ -4,9 +4,9 @@ import unicodedata
 from math import ceil
 
 import requests
-from ai.sentimentanalyser import analyse_text as sa
+from breadcrumbcore.ai.sentimentanalyser import analyse_text as sa
 from bs4 import BeautifulSoup, Comment
-from utils.netutils import generate_request_header
+from breadcrumbcore.utils.netutils import generate_request_header
 
 from breadcrumbcore.searchengines.googlesearch import GoogleWebSearch
 

@@ -1,5 +1,4 @@
 import random
-import socket
 
 BASE_REQUEST_HEADER = {
     'ACCEPT_LANGUAGE': '	en-GB,en;q=0.8,en-US;q=0.6'

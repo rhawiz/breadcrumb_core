@@ -4,7 +4,7 @@ from time import sleep
 
 import requests
 from bs4 import BeautifulSoup
-from utils.netutils import generate_request_header
+from breadcrumbcore.utils.netutils import generate_request_header
 
 from breadcrumbcore.utils.utils import get_hash
 
@@ -43,6 +43,8 @@ GOOGLE_IMAGE_SEARCH_FILTER_TYPE = "itp:{img_search_type}"
 
 GOOGLE_SEARCH_FILTER = "&tbs="
 GOOGLE_SEARCH_FILTER_DATE = "cdr:1,cd_min:{min_date},cd_max:{max_date}"
+
+UNWANTED_URL_HEAD_LIST = ["/url?url=", "/url?q="]
 
 socket.setdefaulttimeout(10)
 
@@ -116,7 +118,7 @@ class GoogleWebSearch:
             if not len(link_url):
                 continue
             link_url = link_url[0]
-            unwanted_head_list = ["/url?url=", "/url?q="]
+            unwanted_head_list = UNWANTED_URL_HEAD_LIST
             for unwanted_head in unwanted_head_list:
                 if link_url.find(unwanted_head) > -1:
                     link_url = link_url[len(unwanted_head):]
