@@ -16,7 +16,7 @@ setup(
     # Versions should comply with PEP440.  For a discussion on single-sourcing
     # the version across setup.py and the project code, see
     # https://packaging.python.org/en/latest/single_source_version.html
-    version='1.2.0',
+    version='0.0.1',
 
     description='Breadcrumb core packages',
     long_description=long_description,
@@ -54,7 +54,7 @@ setup(
     ],
 
     # What does your project relate to?
-    keywords='breadcrumb development tools',
+    keywords='breadcrumb development tools core packages',
 
     # You can just specify the packages manually here if your project is
     # simple. Or you can use find_packages().
