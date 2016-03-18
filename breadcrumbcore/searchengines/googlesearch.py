@@ -46,8 +46,6 @@ GOOGLE_SEARCH_FILTER_DATE = "cdr:1,cd_min:{min_date},cd_max:{max_date}"
 
 UNWANTED_URL_HEAD_LIST = ["/url?url=", "/url?q="]
 
-socket.setdefaulttimeout(10)
-
 
 class GoogleWebSearch:
     def __init__(self, query, wait=-1, start=0, num=50, min_date=None, max_date=None, pages=1):
