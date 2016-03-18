@@ -68,7 +68,7 @@ class GoogleWebSearch:
             url = self._construct_url(page)
             page += 1
             header = generate_request_header()
-            #proxy_dict = generate_proxy_dict()
+            # proxy_dict = generate_proxy_dict()
             try:
                 # request_response = br.open(url)
                 attempts += 1
@@ -116,6 +116,10 @@ class GoogleWebSearch:
             if not len(link_url):
                 continue
             link_url = link_url[0]
+            unwanted_head_list = ["/url?url=", "/url?q="]
+            for unwanted_head in unwanted_head_list:
+                if link_url.find(unwanted_head) > -1:
+                    link_url = link_url[len(unwanted_head):]
 
             link_text = link_tag.get_text()
             short_text = content.find('span', attrs={'class': 'st'})
