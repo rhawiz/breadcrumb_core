@@ -19,13 +19,13 @@ class FacebookCollector:
         user_feed_url = self._construct_url()
 
         user_feed_request = requests.get(user_feed_url).json()
+
         user_feed_paginated = user_feed_request.get('feed')
 
         if not user_feed_paginated:
             raise ValueError(
                 "Could not retrieve Facebook feed with the provided access token.\nFacebook response:\n\t{}".format(
                     json.dumps(user_feed_request)))
-
         all_user_feed = user_feed_paginated.get('data')
 
         # Go to next page ofo user feeds, until we reach the end
@@ -48,7 +48,7 @@ class FacebookCollector:
                         continue
                 self.content.append(feed)
 
-        return json.loads(self.content)
+        return self.content
 
     def _construct_url(self):
 
