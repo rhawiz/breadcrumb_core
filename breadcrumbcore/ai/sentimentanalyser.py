@@ -33,9 +33,10 @@ def analyse_text(text_list):
                 except Exception:
                     continue
 
-    neg /= counter
-    neutral /= counter
-    pos /= counter
+    if counter > 0:
+        neg /= counter
+        neutral /= counter
+        pos /= counter
 
     if neg >= neutral and neg >= pos:
         label = "neg"
