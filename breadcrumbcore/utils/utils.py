@@ -8,7 +8,9 @@ def is_ascii(s):
 
 
 def get_hash8(s):
-    return int(hashlib.sha1(s).hexdigest(), 16) % (10 ** 8)
+    if not s:
+        return int(hashlib.sha1(s).hexdigest(), 16) % (10 ** 8)
+    return 0000000
 
 
 def random_hash8():
