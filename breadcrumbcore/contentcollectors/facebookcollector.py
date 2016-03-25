@@ -48,7 +48,7 @@ class FacebookCollector:
                         continue
                 self.content.append(feed)
 
-        return self.content
+        return json.loads(self.content)
 
     def _construct_url(self):
 
