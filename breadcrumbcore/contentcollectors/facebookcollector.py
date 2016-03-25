@@ -1,17 +1,18 @@
 import json
 
 import requests
+import time
 
-USER_FEED_URL_BASE = "https://graph.facebook.com/me?access_token={}&fields=feed.include_hidden(true)"
-TEST_ACCESS_TOKEN = "CAACxjKIpqZBoBAIsC35PVaZAWpRGvWglhj9beB3AzMFD32xpXFbp1pZAUTLZCG2f0OHeOzVYvMTT5I1j72FDqUTNhpClwyhRbIKVcXBd7wexv5m1B3NCZCkrs21Iadm1KxZCW6VY9CKUsquYoMMtx00aovUlWf16I7pLE4xgnCUMHS9GnXK763xQskpcqmzS7v3V4ZAb4KmkgZDZD"
+USER_FEED_URL_BASE = "https://graph.facebook.com/me?access_token={}&fields=id,name,feed.include_hidden(true).until({}).since({}){{message,permalink_url,created_time}}"
+TEST_ACCESS_TOKEN = "CAACxjKIpqZBoBABZAGXfUq7k5rqTyTeZBpaPZCZAehZCf8ioTnn8N6gw3yuwxt4DmHZBe93YbzDBZBiAWoTXQ4ZBLNQf5EWi2d6gMnEI3XIYFgui3FuqHcWyMx59nZCPAREPfR7YrvgQlXgbFofcxwLdwv6UuLBxpZChIZBvSy9nQYhuuWSxvyqQY06KEerIayMiXYiToaD8GNipVQZDZD"
 
 
 class FacebookCollector:
     def __init__(self, access_token, sentiment_analyser=None, min_date=None, max_date=None):
         self.access_token = access_token
         self.sentiment_analyser = sentiment_analyser
-        self.min_date = min_date
-        self.max_date = max_date
+        self.min_date = min_date or 0
+        self.max_date = max_date or int(time.time())
 
     def run(self):
         self.content = []
@@ -21,8 +22,9 @@ class FacebookCollector:
         user_feed_paginated = user_feed_request.get('feed')
 
         if not user_feed_paginated:
-            raise ValueError("Could not retrieve Facebook feed with the provided access token.\nFacebook response:\n\t{}".format(
-                json.dumps(user_feed_request)))
+            raise ValueError(
+                "Could not retrieve Facebook feed with the provided access token.\nFacebook response:\n\t{}".format(
+                    json.dumps(user_feed_request)))
 
         all_user_feed = user_feed_paginated.get('data')
 
@@ -49,9 +51,18 @@ class FacebookCollector:
         return self.content
 
     def _construct_url(self):
-        url = USER_FEED_URL_BASE.format(self.access_token)
+
+        url = USER_FEED_URL_BASE.format(
+            self.access_token,
+            self.max_date,
+            self.min_date
+        )
+
+        print url
         return url
+
 
 if __name__ == "__main__":
     fc = FacebookCollector(access_token=TEST_ACCESS_TOKEN)
-    print fc.run()
+    content = fc.run()
+    print json.dumps(content)
