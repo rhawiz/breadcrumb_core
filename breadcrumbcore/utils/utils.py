@@ -8,6 +8,7 @@ def is_ascii(s):
 
 
 def get_hash8(s):
+    print s
     if s:
         return int(hashlib.sha1(s).hexdigest(), 16) % (10 ** 8)
     return None
