@@ -6,9 +6,7 @@ url = 'http://text-processing.com/api/sentiment/'
 
 
 def analyse_text(text_list):
-    if isinstance(text_list, str):
-        text_list = [text_list]
-    elif isinstance(text_list, unicode):
+    if not isinstance(text_list, list):
         text_list = [text_list]
 
     neg = 0.0
