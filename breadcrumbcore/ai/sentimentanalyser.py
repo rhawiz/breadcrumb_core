@@ -16,6 +16,7 @@ def analyse_text(text_list):
 
     counter = 0
     for text in text_list:
+        print text
         if is_ascii(text):
             text = text.strip()
             data = 'text={}'.format(text)
