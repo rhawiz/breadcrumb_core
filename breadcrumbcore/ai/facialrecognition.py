@@ -27,16 +27,13 @@ def read_images(path): #read training imgs in to array
         img = cv2.resize(img,(200,200)) #resize imgs into 200*200 pixels
         imgList.append(numpy.asarray(img, dtype=numpy.uint8))
         faceID.append(ID)
-    print imgList
-    print faceID
     return [imgList,faceID]
 
 def face_rec(training_img_path, img_path):
 
-    names = ['Iron Man', 'Dont Know']
     [x,y] = read_images(training_img_path)
     y = numpy.asarray(y, dtype=numpy.int32)
-    model = cv2.face.createEigenFaceRecognizer() #create face recognizer
+    model = cv2.createEigenFaceRecognizer() #create face recognizer
     model.train(numpy.asarray(x), numpy.asarray(y)) # train recognizer
     face_cascade = cv2.CascadeClassifier('./cascades/haarcascade_frontalface_default.xml')
 
@@ -51,4 +48,7 @@ def face_rec(training_img_path, img_path):
         return params
 
 if __name__ == "__main__":
+    print cv2.__version__
     img_path = 'RDJr.jpg'
+    training_imgs = "./faces"
+    print face_rec(training_imgs, img_path)
