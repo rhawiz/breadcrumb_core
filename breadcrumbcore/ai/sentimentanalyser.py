@@ -8,6 +8,7 @@ url = 'http://text-processing.com/api/sentiment/'
 def analyse_text(text_list):
     if isinstance(text_list, str):
         text_list = [text_list]
+
     neg = 0.0
     neutral = 0.0
     pos = 0.0
@@ -31,7 +32,7 @@ def analyse_text(text_list):
                     pos += out_pos
                     counter += 1
                 except Exception:
-                    continue
+                    pass
 
     if counter > 0:
         neg /= counter
@@ -53,3 +54,6 @@ def analyse_text(text_list):
         },
         "label": label
     }
+if __name__ == "__main__":
+    text = "i hate my boss, wish he would just die"
+    print analyse_text(text)

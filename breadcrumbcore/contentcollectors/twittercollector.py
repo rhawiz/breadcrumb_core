@@ -44,4 +44,5 @@ if __name__ == "__main__":
     consumer_secret = "7nitL4Qo2LXilFySk4PPgwYOEZDXWxQIbC6bdS32fKQlSBah55"
     fc = TwitterCollector(key=key, secret=secret, consumer_key=consumer_key, consumer_secret=consumer_secret)
     content = fc.run()
+    print content
     print json.dumps(content)
