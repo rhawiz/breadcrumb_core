@@ -56,5 +56,5 @@ def analyse_text(text_list):
         "label": label
     }
 if __name__ == "__main__":
-    text = unicode("i hate my boss, wish he would just die")
+    text = ["i hate my boss, wish he would just die"]
     print analyse_text(text)
