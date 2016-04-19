@@ -188,12 +188,15 @@ def detect_face(filename, outfile=None):
 
 
 if __name__ == "__main__":
-    img_path = 'jeansy7.jpg'
+    img_path = 'kim_test.jpg'
     converted_img_path = "temp_%s" % img_path
     detect_face(img_path, outfile=converted_img_path)
-    model = get_model_from_csv("faces.csv")
     img = Image.open(converted_img_path)
     img = img.convert("L")
+
+    # model = get_model_from_csv("faces.csv")
+    # save_model("model.pkl", model)
+    model = load_model("model.pkl")
     p = model.predict(img)
     os.remove(converted_img_path)
     print "*******", p
