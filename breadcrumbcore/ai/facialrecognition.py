@@ -188,20 +188,14 @@ def detect_face(filename, outfile=None):
 
 
 if __name__ == "__main__":
-    img_path = 'kim1.jpg'
-    coverted_img_path = "temp_%s" % img_path
-    detect_face(img_path, outfile=coverted_img_path)
+    img_path = 'jeansy7.jpg'
+    converted_img_path = "temp_%s" % img_path
+    detect_face(img_path, outfile=converted_img_path)
     model = get_model_from_csv("faces.csv")
-    img = Image.open(coverted_img_path)
+    img = Image.open(converted_img_path)
     img = img.convert("L")
     p = model.predict(img)
+    os.remove(converted_img_path)
     print "*******", p
 
-    new_numeric_dataset = read_from_csv("new_faces.csv")
-    model.add_data(new_numeric_dataset)
-
-    print model.numeric_dataset.data.keys()
-
-    p = model.predict(img)
-    print "*******", p
 
