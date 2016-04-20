@@ -1,4 +1,6 @@
 # Always prefer setuptools over distutils
+import os
+
 from setuptools import setup, find_packages
 # To use a consistent encoding
 from codecs import open
@@ -59,8 +61,7 @@ setup(
     # You can just specify the packages manually here if your project is
     # simple. Or you can use find_packages().
     packages=find_packages(exclude=['contrib', 'docs', 'tests']),
-    package_data={'': ["breadcrumbcore\\breadcrumbcore\\ai\\cascades\\*.xml"]},
-    data_files=[('', ['\\breadcrumbcore\\breadcrumbcore\\ai\\cascades\\haarcascade_frontalface_default.xml'])]
+    data_files=[('', [os.path.abspath('\\breadcrumbcore\\ai\\cascades\\haarcascade_frontalface_default.xml')])]
 
     # Alternatively, if you want to distribute just a my_module.py, uncomment
     # this:
