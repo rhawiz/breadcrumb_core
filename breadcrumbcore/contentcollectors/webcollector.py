@@ -91,6 +91,8 @@ class WebCollector:
             visible_text += text + ' '
         visible_text = visible_text.replace('\n', ' ')
         visible_text = re.sub(' +', ' ', visible_text)
+        if isinstance(visible_text,str):
+            visible_text = unicode(visible_text, 'unicode-escape')
         visible_text = unicodedata.normalize('NFKD', visible_text).encode('ascii', 'ignore')
         matched_idx = self._find_all_idx(alias, visible_text)
         all_relevant_content = []
