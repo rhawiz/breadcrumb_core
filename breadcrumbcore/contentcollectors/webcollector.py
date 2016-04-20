@@ -57,7 +57,11 @@ class WebCollector:
 
                 if response.status_code == 200:
                     html = response.text
-                    relevant_content = self._get_all_relevant_content(html, alias)
+                    try:
+                        relevant_content = self._get_all_relevant_content(html, alias)
+                    except Exception, e:
+                        print e
+                        relevant_content = [short_text]
                 else:
                     relevant_content = [short_text]
                 output['relevant_content'] = relevant_content
@@ -91,10 +95,9 @@ class WebCollector:
             visible_text += text + ' '
         visible_text = visible_text.replace('\n', ' ')
         visible_text = re.sub(' +', ' ', visible_text)
-        try:
-            visible_text = unicodedata.normalize('NFKD', visible_text).encode('ascii', 'ignore')
-        except Exception, e:
-            return []
+
+        visible_text = unicodedata.normalize('NFKD', visible_text).encode('ascii', 'ignore')
+
         matched_idx = self._find_all_idx(alias, visible_text)
         all_relevant_content = []
         for idx in matched_idx:
