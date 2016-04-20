@@ -147,12 +147,24 @@ def read_from_csv(filename):
     return numeric_dataset
 
 
-def get_numeric_dataset(image_paths, identifier):
+def read_from_file(image_paths, identifier):
     numeric_dataset = NumericDataSet()
     for path in image_paths:
         read_image(path, identifier, numeric_dataset)
     return numeric_dataset
 
+def read_from_folder(folder_path):
+    numeric_dataset = NumericDataSet()
+    if os.path.isdir(folder_path):
+        for subdir, dirs, files in os.walk(folder_path):
+            for file in files:
+                file_path = os.path.abspath("%s/%s"% (subdir, file))
+                sub_dir_parts = os.path.abspath(subdir).split("\\")
+                identifier = subdir
+                if sub_dir_parts:
+                    identifier = sub_dir_parts[-1]
+                read_image(file_path, identifier, numeric_dataset)
+    return numeric_dataset
 
 # Just some sugar on top...
 def get_model_from_csv(filename, out_model_filename=None):
@@ -188,15 +200,15 @@ def detect_face(filename, outfile=None):
 
 
 if __name__ == "__main__":
-    img_path = 'kim_test.jpg'
+    img_path = 'kim1.jpg'
     converted_img_path = "temp_%s" % img_path
     detect_face(img_path, outfile=converted_img_path)
     img = Image.open(converted_img_path)
     img = img.convert("L")
-
-    # model = get_model_from_csv("faces.csv")
-    # save_model("model.pkl", model)
-    model = load_model("model.pkl")
+    dataset = read_from_folder("../faces/")
+    model = get_model(dataset)
+    save_model("model.pkl", model)
+    # model = load_model("model.pkl")
     p = model.predict(img)
     os.remove(converted_img_path)
     print "*******", p
