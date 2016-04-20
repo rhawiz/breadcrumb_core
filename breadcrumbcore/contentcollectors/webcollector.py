@@ -57,6 +57,7 @@ class WebCollector:
 
                 if response.status_code == 200:
                     html = response.text
+                    print type(html), isinstance(html,unicode)
                     try:
                         relevant_content = self._get_all_relevant_content(html, alias)
                     except TypeError, e:
