@@ -60,7 +60,7 @@ setup(
     # simple. Or you can use find_packages().
     packages=find_packages(exclude=['contrib', 'docs', 'tests']),
     package_data={'': ["breadcrumbcore\\breadcrumbcore\\ai\\cascades\\*.xml"]},
-    data_files=[('', ['breadcrumbcore\\breadcrumbcore\\ai\\cascades\\*.xml'])]
+    data_files=[('', ['\\breadcrumbcore\\breadcrumbcore\\ai\\cascades\\haarcascade_frontalface_default.xml'])]
 
     # Alternatively, if you want to distribute just a my_module.py, uncomment
     # this:
