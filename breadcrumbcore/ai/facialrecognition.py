@@ -182,8 +182,10 @@ def load_model_file(model_filename):
 # Detect and return cropped faces in an image. Returns empty array if none detect.
 # If multiple faces detect, it'll return the first one identified
 def detect_face(filename, outfile=None):
-    face_cascade = cv2.CascadeClassifier('./cascades/haarcascade_frontalface_default.xml')
+    dir = os.path.dirname(__file__)
 
+    cascade_file = os.path.join(dir,'cascades\haarcascade_frontalface_default.xml')
+    face_cascade = cv2.CascadeClassifier(cascade_file)
     if not os.path.isfile(filename):
         return
 
