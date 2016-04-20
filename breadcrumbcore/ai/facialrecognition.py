@@ -149,6 +149,8 @@ def read_from_csv(filename):
 
 def read_from_file(image_paths, identifier):
     numeric_dataset = NumericDataSet()
+    if not isinstance(image_paths, list):
+        image_paths = [image_paths]
     for path in image_paths:
         read_image(path, identifier, numeric_dataset)
     return numeric_dataset
