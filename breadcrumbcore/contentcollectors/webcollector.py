@@ -59,7 +59,7 @@ class WebCollector:
                     html = response.text
                     try:
                         relevant_content = self._get_all_relevant_content(html, alias)
-                    except Exception, e:
+                    except TypeError, e:
                         print e
                         relevant_content = [short_text]
                 else:
