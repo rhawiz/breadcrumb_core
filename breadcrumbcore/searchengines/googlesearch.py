@@ -1,6 +1,7 @@
 import json
 import random
 import socket
+import urllib
 import urlparse
 from time import sleep
 
@@ -221,7 +222,7 @@ class GoogleImageSearch:
             url_text = meta_dict.get("pt")
             short_text = meta_dict.get("s")
             img_url = meta_dict.get("ou")
-            page_url = meta_dict.get("pt")
+            page_url = meta_dict.get("ru")
             content = {
                 'img_url': img_url,
                 'page_url': page_url,
@@ -235,4 +236,6 @@ class GoogleImageSearch:
 if __name__ == "__main__":
     imgsrc = GoogleImageSearch(query="Rawand Hawiz",search_type="face")
     content = imgsrc.search()
+    test=content[0]["img_url"]
+    urllib.urlretrieve(test, "00000001.jpg")
     print content
