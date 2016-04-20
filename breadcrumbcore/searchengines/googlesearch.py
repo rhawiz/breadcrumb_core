@@ -236,6 +236,4 @@ class GoogleImageSearch:
 if __name__ == "__main__":
     imgsrc = GoogleImageSearch(query="Rawand Hawiz",search_type="face")
     content = imgsrc.search()
-    test=content[0]["img_url"]
-    urllib.urlretrieve(test, "00000001.jpg")
     print content

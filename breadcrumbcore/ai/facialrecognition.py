@@ -200,21 +200,19 @@ def detect_face(filename, outfile=None):
         cropped = gray[y:y + h, x:x + w]
         if outfile:
             cv2.imwrite(outfile, cropped)
-        return cropped
+        pil_img = Image.fromarray(cropped)
+        return pil_img
 
 
 if __name__ == "__main__":
     img_path = 'kim1.jpg'
-    converted_img_path = "temp_%s" % img_path
-    detect_face(img_path, outfile=converted_img_path)
-    img = Image.open(converted_img_path)
+    img = detect_face(img_path)
     img = img.convert("L")
     # dataset = read_from_folder("../faces/")
     # model = get_model(dataset)
     # save_model("model.pkl", model)
     model = load_model("model.pkl")
     p = model.predict(img)
-    os.remove(converted_img_path)
     print "*******", p
 
 
