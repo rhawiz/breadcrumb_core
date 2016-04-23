@@ -58,7 +58,6 @@ class FacebookCollector:
             self.min_date
         )
 
-        print url
         return url
 
 
