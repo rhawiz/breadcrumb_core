@@ -22,9 +22,11 @@ class TwitterCollector:
         timeline = api.user_timeline(count=500)
         self.content = []
         for status in timeline:
+            created_at_timestamp = int(time.mktime(status.created_at.timetuple()))
             data = {
                 "text":status.text,
                 "id":status.id,
+                "created_at_timestamp":created_at_timestamp,
                 "url":"https://twitter.com/{}/status/{}".format(status.author.screen_name,status.id)
             }
 
@@ -40,8 +42,8 @@ class TwitterCollector:
 if __name__ == "__main__":
     key = "718466809184317441-wcvWbGjyD935PagRcM3IQAA9H60tQy6"
     secret = "pQgEQJQXSRINVuaVr5240zSdnRZIHT6GHZvROEYDnyBug"
-    consumer_key = "c2eZxqYJ1l6fHO9X2M42DsDgH"
-    consumer_secret = "7nitL4Qo2LXilFySk4PPgwYOEZDXWxQIbC6bdS32fKQlSBah55"
+    consumer_key = "5xbL8ZrvE1eSzINQfLKgPYVPE"
+    consumer_secret = "ZxrB9fg2J1ZB8V16Bt6jIQ61nBOmUK74WryiP1yK3ZRkUmNRIx"
     fc = TwitterCollector(key=key, secret=secret, consumer_key=consumer_key, consumer_secret=consumer_secret)
     content = fc.run()
     print content

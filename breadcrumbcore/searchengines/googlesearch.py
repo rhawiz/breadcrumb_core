@@ -60,7 +60,6 @@ class GoogleWebSearch:
             except Exception, e:
                 print e
                 continue
-
             html_response = request_response.text
             # html_response = request_response.read()
 
@@ -234,6 +233,6 @@ class GoogleImageSearch:
         return results
 
 if __name__ == "__main__":
-    imgsrc = GoogleImageSearch(query="Rawand Hawiz",search_type="face")
-    content = imgsrc.search()
+    src = GoogleWebSearch(query="Rawand Hawiz")
+    content = src.search()
     print content
